@@ -1,0 +1,48 @@
+<! DOCTYPE html>
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/index.css' %}" />
+
+<div class="tophead">
+
+<a class="logout" href = "{% url 'polls:logout' %}">Logout </a>
+<a class="changepwd" href = "{% url 'polls:changepwdpage' %}">Change Password</a>
+
+<a class="profile" href = "{% url 'polls:profilepage' %}">Edit Profile</a>
+<p class="username">Hi , {{ user.get_username }}</p>
+
+
+</div
+
+<header>
+<div class="heading">
+<img class="logo" src="{{ STATIC_URL }}polls/images/logo.png" width="50px" height="50px">
+<span class="headingtext" >Answer the questions.</span>
+<img class="logotext" src="{{ STATIC_URL }}polls/images/textlogo.jpg" width="50px" height="50px">
+</div>
+
+<marquee>
+<h4>(Click the question for voting.You can answer as many question you could.)</h4>
+</marquee>
+</header>
+
+<body class="body">
+<br>
+<div class="box">
+{% if latest_question_list %}
+	<ul>
+	{% for question in latest_question_list %}
+		<li><a href = "{% url 'polls:detail' question.id %}">{{ question.question_text }}</a>
+</li><br><br>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p>No polls are available.</p>
+{% endif %}
+</body>
+</div>
+
+
+<div class="bottom">
+</div>
+<div class="down">&copy; Gupta & Associates</div>

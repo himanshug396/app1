@@ -1,0 +1,56 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/changepwd.css' %}" />
+
+
+<div class="tophead">
+
+<a class = "logout" href = "{% url 'polls:logout' %}">Logout </a>
+<a class="changepwd" href = "{% url 'polls:changepwdpage' %}">Change Password</a>
+
+<a class="profile" href = "{% url 'polls:profilepage' %}">Edit Profile</a>
+<a class="homepage" href = "{% url 'polls:index' %}">Home</a>
+<p class="username">Hi , {{ user.get_username }}</p>
+
+
+</div>
+<div class="heading">
+<img class="logo" src="{{ STATIC_URL }}polls/images/logo.png" width="50px" height="50px">
+<span class="headingtext" >Change Password</span>
+
+<br><br><br><br><br>
+</div>
+
+
+{% if message %}<p class="error"><strong>{{message}}</strong></p> {% endif %}
+<body>
+<form action= "{% url 'polls:changepwd' %}" method="post">
+{% csrf_token %}
+<div class="box">
+
+<table align="center" >
+
+
+<br><br>
+
+
+<tr><td class="td"><b>Old Password</b></td>
+<td><input class="inpt" type="password" name="oldpassword"  method="POST"></td>
+</tr>
+<tr><td class="td"><b>New Password</b></td>
+<td><input class="inpt" type="password" name="password1"  method="POST"></td>
+</tr>
+
+<tr><td class="td"><b>Confirm New Password</b></td>
+<td><input class="inpt" type="password" name="password2"  method="POST"></td>
+</tr>
+</table> 
+<br><br><br>
+<input class="change" type="submit" name="changepwd" value="Change Password" />
+
+</div>
+</form>
+</body>
+<div class="bottom">
+</div>
+<div class="down">&copy; Gupta & Associates</div>

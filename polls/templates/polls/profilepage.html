@@ -1,0 +1,57 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/profilepage.css' %}" />
+
+<div class="tophead">
+
+<a class="logout" href = "{% url 'polls:logout' %}">Logout </a>
+<a class="changepwd" href = "{% url 'polls:changepwdpage' %}">Change Password</a>
+
+<a class="profile" href = "{% url 'polls:profilepage' %}">Edit Profile</a>
+<a class="homepage" href = "{% url 'polls:index' %}">Home</a>
+<p class="username">Hi , {{ user.get_username }}</p>
+
+
+</div>
+<div class="heading">
+<img class="logo" src="{{ STATIC_URL }}polls/images/logo.png" width="50px" height="50px">
+<span class="headingtext" >{{ user.first_name }} &nbsp; {{ user.last_name }}</span>
+
+<br><br><br><br><br>
+</div>
+
+
+{% if message %}<p class="error"><strong>{{message}}</strong></p> {% endif %}
+<body>
+<form action= "{% url 'polls:editprofile' %}" method="post">
+{% csrf_token %}
+<div class="box">
+
+<table align="center" ">
+<div  class="first">
+
+<br><br>
+
+
+<tr><td class="td"><b>First Name</b></td>
+<td><input class="inpt" type="text" name="firstname"  method="POST" value = " {{ user.first_name }} "></td>
+</tr>
+<tr><td class="td"><b>Last Name</b></td>
+<td><input class="inpt" type="text" name="lastname"  method="POST" value=" {{ user.last_name }}"></td>
+</tr>
+
+<tr><td class="td"><b>E-mail</b></td>
+<td><input class="inpt" type="text" name="email"  method="POST" value="{{ user.email }}"></td>
+</tr>
+</div>
+
+</table> 
+
+<br><br><br>
+<input class="change" type="submit" name="save" value="Save Changes" />
+</div>
+</form>
+</body>
+<div class="bottom">
+</div>
+<div class="down">&copy; Gupta & Associates</div>

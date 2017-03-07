@@ -1,0 +1,46 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/results.css' %}" />
+
+<div class="tophead">
+
+<a class = "logout" href = "{% url 'polls:logout' %}">Logout </a>
+<a class="changepwd" href = "{% url 'polls:changepwdpage' %}">Change Password</a>
+
+<a class="profile" href = "{% url 'polls:profilepage' %}">Edit Profile</a>
+<a class="homepage" href = "{% url 'polls:index' %}">Home</a>
+<p class="username">Hi , {{ user.get_username }}</p>
+
+
+</div>
+
+
+<div class="heading">
+
+<span class="headingtext" >
+
+{{ question.question_text }}
+</span>
+</div>
+
+<body class="body">
+
+<ul>
+
+{% for choice in question.choice_set.all %}
+	<li>{{ choice.choice_text }} 				--				{{ choice.votes }} vote{{choice.votes|pluralize }}</li>
+<br>{% endfor %}
+
+
+
+
+</body>
+<br><br>
+<div class="vote">
+<a href = "{% url 'polls:detail' question.id %}">Vote Again? </a>
+</ul>
+</div>
+
+<div class="bottom">
+</div>
+<div class="down">&copy; Gupta & Associates</div>

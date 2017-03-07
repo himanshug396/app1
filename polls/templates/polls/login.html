@@ -1,0 +1,44 @@
+
+
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/login.css' %}" />
+
+ 
+<body>
+<div class="heading">
+<img class="logo" src="{{ STATIC_URL }}polls/images/logo.png" width="50px" height="50px">
+<span class="headingtext" >Welcome !</span>
+
+<br><br><br><br><br>
+</div>
+{% if message %}<p class="error"><strong>{{message}}</strong></p> {% endif %}
+<form action= "{% url 'polls:afterloginpage' %}" method="post">
+{% csrf_token %}
+<div class="box">
+
+<table align="center" ">
+<div  class="first">
+<thead><span class="Thead"><b>Login</b></span></thead>
+<tr>
+<td class="td"><b>Username</b></td>
+<td><input class="inpt" type="text" name="username" method="POST"></td>
+</tr><br><br>
+<tr><td class="td"><b>Password</b></td>
+<td><input class="inpt" type="password" name="password"  method="POST"></td>
+</tr></div>
+</table>
+
+<div>
+<br><br><br>
+<input class="button2" type="submit" name="Login" value="Login" />
+</form>
+<form action="{% url 'polls:signup' %}">
+<input class="button1" type="submit" name="signup" value="Sign Up" />
+</form></div>
+</div>
+</body>
+
+<div class="bottom">
+</div>
+<div class="down">&copy; Gupta & Associates</div>

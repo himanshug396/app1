@@ -1,0 +1,48 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/detail.css' %}" />
+
+
+<div class="tophead">
+
+<a class = "logout" href = "{% url 'polls:logout' %}">Logout </a>
+<a class="changepwd" href = "{% url 'polls:changepwdpage' %}">Change Password</a>
+
+<a class="profile" href = "{% url 'polls:profilepage' %}">Edit Profile</a>
+<a class="homepage" href = "{% url 'polls:index' %}">Home</a>
+<p class="username">Hi , {{ user.get_username }}</p>
+
+
+</div>
+
+
+
+<div class="heading">
+
+<span class="headingtext" >{{question.question_text }}</span>
+</div>
+{% if error_message %}<p class="error"><strong>{{error_message}}</strong></p> {% endif %}
+<body class="body">
+<form action= "{% url 'polls:vote' question.id %}" method="post">
+
+{% csrf_token %}
+
+<div class="ul" >
+<ol type="I">
+{% for choice in question.choice_set.all %}
+	<li><span class="li" ><input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{choice.id}}" />
+	<label for="choice{{ forloop.counter }}" > {{ choice.choice_text }}</label></br>
+	</span></li><br>
+{% endfor %}
+</ol>
+
+<br><br>
+<input type="submit" value="Vote" class="vote" />
+</div>
+</form>
+
+</body>
+
+<div class="bottom">
+</div>
+<div class="down">&copy; Gupta & Associates</div>
