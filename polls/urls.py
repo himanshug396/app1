@@ -3,7 +3,10 @@ from django.contrib.auth.decorators import login_required
 from polls import views
  
 urlpatterns = patterns('',
-	url(r'^$',login_required(views.IndexView.as_view()) , name = 'index'),
+	
+	url(r'^feedback',login_required(views.IndexView2.as_view()) , name = 'index2'),
+	
+	url(r'^$',views.IndexView.as_view() , name = 'index'),
 		# ex: /polls/5/
 	url(r'^(?P<pk>\d+)/$',login_required (views.DetailView.as_view()), name='detail'),
     # ex: /polls/5/results/
@@ -27,6 +30,7 @@ urlpatterns = patterns('',
 	url(r'^changepwd/$' , views.changepassword , name = 'changepwd'),
 	
 	url(r'^changepwdpage/$' , views.changepasswordpage , name = 'changepwdpage'),
+	url(r'^library/$' , views.library , name = 'library'),
 	
 	)
 	
